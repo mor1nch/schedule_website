@@ -9,12 +9,12 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
 
-    <title>My First APP</title>
+    <title>College schedule</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Меню</a>
+        <a class="navbar-brand" href="/">Кафедра ТиЭМ</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -22,63 +22,65 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Главная</a>
+                    <a class="nav-link active" aria-current="page" href="/">Расписание</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/page1">Страница</a>
+                    <a class="nav-link" href="/schedule/today/">Расписание на сегодня</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/schedule/tomorrow/">Расписание на завтра</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Перейти
+                        День недели
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/page1">Страница 1</a></li>
-                        <li><a class="dropdown-item" href="/page1">Страница 2</a></li>
+                        <li><a class="dropdown-item" href="/schedule/понедельник">Понедельник</a></li>
+                        <li><a class="dropdown-item" href="/schedule/вторник">Вторник</a></li>
+                        <li><a class="dropdown-item" href="/schedule/среда">Среда</a></li>
+                        <li><a class="dropdown-item" href="/schedule/четверг">Четверг</a></li>
+                        <li><a class="dropdown-item" href="/schedule/пятница">Пятница</a></li>
+                        <li><a class="dropdown-item" href="/schedule/суббота">Суббота</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="/page1">Страница 2</a></li>
+                        <li><a class="dropdown-item" href="/schedule/воскресенье">Воскресенье</a></li>
                     </ul>
                 </li>
             </ul>
-            <form class="d-flex" method="GET" action="/page4">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex" method="GET" action="/search/">
+                <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Поиск</button>
             </form>
         </div>
     </div>
 </nav>
 
-<p class="text-sm-start">Start aligned text on viewports sized SM (small) or wider.</p>
+<p class="text-sm-start">Расписание кафедры ТиЭМ</p>
 
 <table class="table">
     <thead>
     <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col">Discipline</th>
+        <th scope="col">Day week</th>
+        <th scope="col">Time</th>
+        <th scope="col">Classroom</th>
+        <th scope="col">Teacher</th>
+        <th scope="col">Type</th>
     </tr>
     </thead>
     <tbody>
+    {% for day in schedule %}
     <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+        <th scope="row">{{ day.discipline }}</th>
+        <td>{{ day.day_week }}</td>
+        <td>{{ day.time }}</td>
+        <td>{{ day.classroom }}</td>
+        <td>{{ day.teacher }}</td>
+        <td>{{ day.type }}</td>
     </tr>
-    <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-    </tr>
-    <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-    </tr>
+    {% endfor %}
     </tbody>
 </table>
 
